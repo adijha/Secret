@@ -27,7 +27,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("PROCESS.ENV.mongoURI", {useNewUrlParser: true});
+mongoose.connect(process.env.mongoURI, { useNewUrlParser: true })
+    .then(() => console.log('You are now connected to Mongo!'))
+    .catch(err => console.error('Something went wrong', err))
 mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema ({
